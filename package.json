@@ -11,7 +11,7 @@
   },
   "author": "DRRONIDZ",
   "license": "MIT",
-  "browserslist": "> 0.5%",
+  "browserslist": ["> 0.5%"],
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/preset-env": "^7.6.2",
