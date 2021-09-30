@@ -10,8 +10,24 @@ class PlaceFinder {
         this.shareButton = document.getElementById('share-btn')
 
         locateUserButton.addEventListener('click', this.locateUserHandler.bind(this))
-        this.shareButton.addEventListener('click')
+        this.shareButton.addEventListener('click', this.sharePlaceHandler)
         addressForm.addEventListener('submit', this.findAddressHandler.bind(this))
+    }
+
+    sharePlaceHandler () {
+        const sharedLinkInputElement = document.getElementById('share-link')
+        if (!navigator.clipboard) {
+            sharedLinkInputElement.select()
+        }
+        else {
+            navigator.clipboard.writeText(sharedLinkInputElement.value)
+                .then(() => {
+                    alert('Copied into clipboard!')
+            })
+                .catch(error => {
+                    console.log(error)
+                })
+        }
     }
 
     selectPlace(coordinates, address) {
