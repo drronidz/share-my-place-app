@@ -1,5 +1,6 @@
 import { Modal } from './UI/Modal'
 import { Map } from './UI/Map'
+import { getCoordinatesFromAddress } from './Utility/Location'
 
 // TODO NO API KEY SINCE WE DON'T HAVE A CREDIT CARD !!
 class PlaceFinder {
@@ -49,7 +50,7 @@ class PlaceFinder {
           }
     }
 
-    findAddressHandler(event) {
+    async findAddressHandler(event) {
         event.preventDefault()
         const address = event.target.querySelector('input').value
         if (!address || address.trim().length === 0) {
@@ -61,6 +62,13 @@ class PlaceFinder {
                 'Loading location - please wait!'
             )
             modal.show()
+            try {
+                const coordinates = await getCoordinatesFromAddress(address)
+                this.selectPlace(coordinates)
+            } catch (error) {
+                alert(error.message)
+            }
+            modal.hide()
         }
     }
 }
