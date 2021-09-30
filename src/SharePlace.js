@@ -1,4 +1,5 @@
-import { Modal,Map } from './UI/Modal'
+import { Modal } from './UI/Modal'
+import { Map } from './UI/Map'
 
 // TODO NO API KEY SINCE WE DON'T HAVE A CREDIT CARD !!
 class PlaceFinder {
@@ -48,8 +49,19 @@ class PlaceFinder {
           }
     }
 
-    findAddressHandler() {
-
+    findAddressHandler(event) {
+        event.preventDefault()
+        const address = event.target.querySelector('input').value
+        if (!address || address.trim().length === 0) {
+            alert('Invalid address entered - please try again!')
+        }
+        else {
+            const modal = new Modal(
+                'loading-modal-content',
+                'Loading location - please wait!'
+            )
+            modal.show()
+        }
     }
 }
 
